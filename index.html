@@ -2,487 +2,856 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="description" content="NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models">
+  <style>
+    .nrvq-grad {
+      background: linear-gradient(90deg, #4ECFFF, #7B6FE8, #C56FE8, #E06FCA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+    .eeg { color: #4B3FA0; font-weight: 700; }
+    .ecg { color: #2A9D9D; font-weight: 700; }
+    .emg { color: #D4508A; font-weight: 700; }
+  </style>
+  <meta name="keywords" content="NeuroRVQ, EEG, tokenizer, foundation model, brainwave, RVQ, biosignals">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
+  <title>NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    function gtag() {
-      dataLayer.push(arguments);
+  <style>
+    :root {
+      --accent: #7B6FE8;
+      --accent-light: #9B8FFF;
+      --cyan: #4ECFFF;
+      --purple: #7B6FE8;
+      --pink: #E06FCA;
+      --bg: #ffffff;
+      --section-bg: #f5f5f5;
     }
 
-    gtag('js', new Date());
+    body {
+      font-family: 'Noto Sans', sans-serif;
+    }
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+    .hero-body {
+      padding-top: 3rem;
+      padding-bottom: 1rem;
+    }
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      line-height: 1.2;
+    }
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+    .publication-authors {
+      font-size: 1.05rem;
+      margin-top: 0.75rem;
+    }
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+    .publication-authors a {
+      color: var(--accent);
+    }
+
+    .publication-authors a:hover {
+      color: var(--accent-light);
+    }
+
+    .author-block {
+      display: inline-block;
+      margin-right: 0.15rem;
+    }
+
+    .publication-affiliations {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    .publication-links {
+      margin-top: 1.25rem;
+    }
+
+    .publication-links .button {
+      margin: 0.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .link-block .icon {
+      margin-right: 0.25rem;
+    }
+
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #363636;
+    }
+
+    .content-paragraph {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #4a4a4a;
+      text-align: justify;
+    }
+
+    .alt-section {
+      background-color: var(--section-bg);
+    }
+
+    .method-image {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1.5rem auto;
+      display: block;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 1rem 0;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .result-table thead {
+      background: linear-gradient(90deg, #4ECFFF, #7B6FE8, #E06FCA);
+      color: #fff;
+    }
+
+    .result-table th, .result-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: center;
+    }
+
+    .result-table tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .result-table tbody tr:last-child {
+      background: #f0eeff;
+      font-weight: 700;
+    }
+
+    .result-table .best {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .modality-table {
+      width: auto;
+      margin: 1rem auto;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .modality-table th, .modality-table td {
+      padding: 0.55rem 1.2rem;
+      text-align: center;
+    }
+
+    .modality-table thead {
+      background: linear-gradient(90deg, #4ECFFF, #7B6FE8, #E06FCA);
+      color: #fff;
+    }
+
+    .modality-table tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .bibtex-box {
+      background: #1b1b2f;
+      color: #a8d8ea;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #ccc;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+    }
+
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+
+    .feature-card .icon-wrap {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card h4 {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .pipeline-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .step-content h4 {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-content p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    footer.footer {
+      padding: 1.5rem;
+      background: var(--section-bg);
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #4ECFFF, #7B6FE8, #E06FCA, #363636);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -30px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
+      z-index: 1;
+    }
+
+    .timeline-marker-star {
+      position: absolute;
+      left: -36px;
+      top: -2px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4ECFFF, #7B6FE8, #E06FCA);
+      color: #fff;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 2px 8px rgba(123,111,232,0.3);
+      z-index: 1;
+    }
+
+    .timeline-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: box-shadow 0.2s;
+    }
+
+    .timeline-content:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .timeline-highlight .timeline-content {
+      background: linear-gradient(135deg, #eef8ff, #f0eeff, #fdf0fa);
+      border: 2px solid #e0daf0;
+    }
+
+    .timeline-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #363636;
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.55;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .timeline-link:hover {
+      color: var(--accent-light);
+    }
+
+    .timeline-authors {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+
+    .timeline-authors strong {
+      color: #555;
+      font-style: normal;
+    }
+
+    .banner-img {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto 1rem;
+      display: block;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .publication-title { font-size: 1.5rem; }
+      .section-title { font-size: 1.3rem; }
+      .pipeline-step { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
+<!-- Hero -->
 <section class="hero">
   <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
-          </div>
+    <div class="container is-max-desktop has-text-centered">
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
-            </div>
-
-          </div>
-        </div>
+      <div style="margin-bottom:1rem;">
+        <img src="./static/images/logo.png" alt="NeuroRVQ Logo" style="display:block;margin:0 auto;max-width:280px;width:100%;border-radius:10px;">
       </div>
-    </div>
-  </div>
-</section>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
-    </div>
-  </div>
-</section>
+      <h1 class="publication-title">
+        <span style="background:linear-gradient(90deg, #4ECFFF, #7B6FE8, #C56FE8, #E06FCA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">NeuroRVQ</span>: Multi-Scale EEG Tokenization for Generative Large Brainwave Models
+      </h1>
 
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
+      <div class="publication-authors">
+        <span class="author-block"><a href="https://www.barmpas.com" target="_blank">Konstantinos Barmpas</a><sup>1,2</sup>,</span>
+        <span class="author-block"><a href="https://www.linkedin.com/in/na-lee-57777387/" target="_blank">Na Lee</a><sup>1,2</sup>,</span>
+        <span class="author-block"><a href="https://akoliousis.com" target="_blank">Alexandros Koliousis</a><sup>3</sup>,</span>
+        <span class="author-block"><a href="http://users.uoa.gr/~yannisp/" target="_blank">Yannis Panagakis</a><sup>2,4,5</sup>,</span>
+        <span class="author-block"><a href="https://profiles.imperial.ac.uk/d.adamos" target="_blank">Dimitrios Adamos</a><sup>1,2</sup>,</span>
+        <span class="author-block"><a href="https://people.auth.gr/laskaris/?lang=en" target="_blank">Nikolaos Laskaris</a><sup>2,6</sup>,</span>
+        <span class="author-block"><a href="https://profiles.imperial.ac.uk/s.zafeiriou" target="_blank">Stefanos Zafeiriou</a><sup>1,2</sup></span>
       </div>
+
+      <div class="publication-affiliations">
+        <sup>1</sup>Imperial College London&emsp;
+        <sup>2</sup>Cogitat&emsp;
+        <sup>3</sup>Northeastern University London&emsp;
+        <sup>4</sup>National and Kapodistrian University of Athens&emsp;
+        <sup>5</sup>Archimedes Research Unit&emsp;
+        <sup>6</sup>Aristotle University of Thessaloniki
+      </div>
+
+      <div class="publication-links">
+        <a class="button is-dark is-rounded" href="https://arxiv.org/abs/2510.13068" target="_blank">
+          <span class="icon"><i class="fas fa-file-pdf"></i></span>
+          <span>arXiv</span>
+        </a>
+        <a class="button is-dark is-rounded" href="https://github.com/KonstantinosBarmpas/NeuroRVQ" target="_blank">
+          <span class="icon"><i class="fab fa-github"></i></span>
+          <span>Code</span>
+        </a>
+        <a class="button is-dark is-rounded" href="https://huggingface.co/ntinosbarmpas/NeuroRVQ" target="_blank">
+          <span class="icon">&#129303;</span>
+          <span>Models</span>
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- Banner -->
+<section class="section" style="padding-top:1rem;padding-bottom:0;">
+  <div class="container is-max-desktop has-text-centered">
+    <img src="./static/images/banner.png" alt="NeuroRVQ Banner" style="max-width:700px;width:100%;margin:0 auto;display:block;">
+  </div>
+</section>
 
+<!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
+    <h2 class="section-title has-text-centered">Abstract</h2>
+    <p class="content-paragraph">
+      Electroencephalography (EEG) captures neural activity across multiple temporal and spectral scales, yielding signals that are rich but complex for representation learning. Recently, EEG foundation models trained to predict masked signal-tokens have shown promise for learning generalizable representations. However, their performance is hindered by their signal tokenization modules. Existing neural tokenizers fail to preserve high-frequency dynamics, limiting their ability to reconstruct EEG signals with high fidelity.
+      We introduce <strong><span class="nrvq-grad">NeuroRVQ</span></strong>, a scalable Large Brainwave Model (LBM) centered on a codebook-based tokenizer. Our tokenizer integrates:
+      (i)&nbsp;multi-scale feature extraction modules that capture the full frequency neural spectrum;
+      (ii)&nbsp;hierarchical residual vector quantization (RVQ) codebooks for high-resolution encoding; and
+      (iii)&nbsp;a unit circle phase-aware loss for efficient training.
+      This design enables efficient EEG compression while supporting accurate reconstruction across all frequency bands, leading to robust generative masked modeling. Our empirical results demonstrate that <span class="nrvq-grad">NeuroRVQ</span> achieves lower reconstruction error and outperforms existing LBMs on a variety of downstream tasks. More broadly, <span class="nrvq-grad">NeuroRVQ</span> establishes a strong prior for codebook-based general-purpose brainwave models, enabling advances in neural decoding, generative modeling, and multimodal biosignal integration.
+    </p>
   </div>
 </section>
 
+<!-- Key Contributions -->
+<section class="section alt-section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Key Contributions</h2>
+    <div style="max-width:700px;margin:0 auto;">
+      <div class="pipeline-step">
+        <div class="step-number" style="background:#4ECFFF;color:#1a1a2e;">&#10003;</div>
+        <div class="step-content">
+          <h4>First High-Fidelity Codebook Tokenizer for EEG</h4>
+          <p>While discrete codebook-based tokenizers work well in vision and audio, <span class="nrvq-grad">NeuroRVQ</span> is the first to achieve faithful signal reconstruction for brain signals.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-number" style="background:#7B6FE8;">&#10003;</div>
+        <div class="step-content">
+          <h4>Multi-Scale Frequency Preservation</h4>
+          <p>Unlike existing tokenizers that lose high-frequency dynamics, <span class="nrvq-grad">NeuroRVQ</span> captures and reconstructs the full neural spectrum from delta to gamma bands.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-number" style="background:#C56FE8;">&#10003;</div>
+        <div class="step-content">
+          <h4>Cross-Modality Generalization</h4>
+          <p>Preliminary results on <span class="emg">EMG</span> and <span class="ecg">ECG</span> demonstrate <span class="nrvq-grad">NeuroRVQ</span> tokenizer's potential to extend beyond <span class="eeg">EEG</span> to general-purpose biosignal modeling.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-number" style="background:#E06FCA;">&#10003;</div>
+        <div class="step-content">
+          <h4>Up to 15% Improvement on BCI Tasks</h4>
+          <p><span class="nrvq-grad">NeuroRVQ</span> foundation model outperforms all existing LBMs across five diverse downstream tasks while using only 5.9M parameters.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Method -->
 <section class="section">
   <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Method</h2>
 
-    <div class="columns is-centered">
+    <p class="content-paragraph" style="margin-bottom:1.5rem;">
+      The <strong><span class="nrvq-grad">NeuroRVQ</span> Tokenizer</strong> converts raw biosignals into compact and informative neural tokens. The input multi-variate time series is segmented into patches, encoded by the multi-scale temporal encoder at multiple resolutions, combined via a transformer encoder, then discretized into neural tokens through per-scale RVQ codebooks. Tokens are decoded to reconstruct the input patches using the Fourier spectrum.
+    </p>
 
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
+    <figure style="text-align:center;margin-bottom:2rem;">
+      <img src="./static/images/tokenizer.png" alt="NeuroRVQ Tokenizer Architecture" class="method-image">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Figure 1: The <span class="nrvq-grad">NeuroRVQ</span> tokenizer architecture with multi-scale temporal encoder and hierarchical RVQ codebooks.</figcaption>
+    </figure>
+
+    <div style="background:linear-gradient(135deg, #eef8ff, #f0eeff, #fdf0fa);border-radius:10px;padding:1.75rem;margin-bottom:2rem;">
+      <div class="pipeline-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Multi-Scale Temporal Encoding</h4>
+          <p>Temporal convolutions with varying kernel sizes capture features across multiple frequency resolutions — from slow delta waves to fast gamma oscillations.</p>
         </div>
       </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
+      <div class="pipeline-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Transformer-Based Context Modeling</h4>
+          <p>Transformer layers model long-range spatio-temporal dependencies across channels and patches, producing rich contextualized embeddings.</p>
         </div>
       </div>
-    </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
-          </p>
+      <div class="pipeline-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Hierarchical RVQ Quantization</h4>
+          <p>Per-scale Residual Vector Quantization codebooks discretize the multi-scale embeddings into sequences of neural tokens optimized for reconstruction fidelity.</p>
         </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
       </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
+      <div class="pipeline-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Phase-Aware Reconstruction</h4>
+          <p>A decoder reconstructs input patches using the Fourier spectrum, supervised by a unit circle loss that jointly captures amplitude and phase information.</p>
         </div>
       </div>
     </div>
-    <!--/ Concurrent Work. -->
 
+    <p class="content-paragraph">
+      The <strong><span class="nrvq-grad">NeuroRVQ</span> Foundation Model</strong> operates on the tokenized representation, using masked-token prediction with symmetric masking. By working at the token level, it captures long-range dependencies, learns abstract neural dynamics, and enables efficient pre-training across diverse biosignal datasets. The learned codebooks serve as prediction targets during pre-training, and the resulting representations transfer effectively to a range of downstream BCI tasks.
+    </p>
+
+    <figure style="text-align:center;margin-top:1.5rem;">
+      <img src="./static/images/foundation_model.png" alt="NeuroRVQ Foundation Model Architecture" class="method-image">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Figure 2: The <span class="nrvq-grad">NeuroRVQ</span> foundation model with masked-token prediction and symmetric masking strategy.</figcaption>
+    </figure>
   </div>
 </section>
 
+<!-- Reconstruction -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Reconstruction Quality</h2>
+    <p class="content-paragraph" style="text-align:center;margin-bottom:1.5rem;">
+      Per-band analysis of reconstructed <span class="eeg">EEG</span> signals. <span class="nrvq-grad">NeuroRVQ</span> faithfully preserves waveform morphology across all frequency bands, while existing tokenizers lose high-frequency detail.
+    </p>
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
-}</code></pre>
+    <figure style="text-align:center;">
+      <img src="./static/images/reconstruction.png" alt="Per-Band EEG Reconstruction Comparison" class="method-image">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Per-band reconstruction of EEG signal from LaBraM and <span class="nrvq-grad">NeuroRVQ</span> codebook-based tokenizers.</figcaption>
+    </figure>
+
+    <figure style="text-align:center;margin-top:2rem;">
+      <img src="./static/images/recon_comparison.png" alt="BrainOmni vs NeuroRVQ Reconstruction Comparison" class="method-image">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Reconstruction comparison between RVQ-codebook-based tokenisers, BrainOmni and <span class="nrvq-grad">NeuroRVQ</span>.</figcaption>
+    </figure>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem;">
+      <figure style="text-align:center;margin:0;">
+        <img src="./static/images/recon_eeg.png" alt="EEG Reconstruction" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;box-shadow:0 2px 12px rgba(75,63,160,0.12);">
+        <figcaption style="font-size:0.88rem;margin-top:0.6rem;"><span class="eeg">EEG</span></figcaption>
+      </figure>
+      <figure style="text-align:center;margin:0;">
+        <img src="./static/images/recon_emg.png" alt="EMG Reconstruction" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;box-shadow:0 2px 12px rgba(212,80,138,0.12);">
+        <figcaption style="font-size:0.88rem;margin-top:0.6rem;"><span class="emg">EMG</span></figcaption>
+      </figure>
+      <figure style="text-align:center;margin:0;">
+        <img src="./static/images/recon_ecg.png" alt="ECG Reconstruction" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;box-shadow:0 2px 12px rgba(42,157,157,0.12);">
+        <figcaption style="font-size:0.88rem;margin-top:0.6rem;"><span class="ecg">ECG</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
+<!-- Modalities -->
+<section class="section alt-section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Supported Modalities &amp; Models</h2>
 
+    <table class="modality-table" style="width:100%;">
+      <thead>
+        <tr><th>Model Version</th><th>Parameters</th><th>Modality</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span>-tokenizer-v1</td><td>76M</td><td><span class="eeg">EEG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span>-foundation-model-v1</td><td>6M</td><td><span class="eeg">EEG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span>-tokenizer-v1</td><td>144M</td><td><span class="emg">EMG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span>-foundation-model-v1</td><td>6M</td><td><span class="emg">EMG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span>-tokenizer-v1</td><td>—</td><td><span class="ecg">ECG</span></td><td>&#9200; Coming Soon</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span>-foundation-model-v1</td><td>—</td><td><span class="ecg">ECG</span></td><td>&#9200; Training</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Downstream Performance -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Downstream Performance</h2>
+
+    <h3 style="font-family:'Google Sans',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:0.75rem;"><span class="eeg">EEG</span> Downstream Performance</h3>
+    <p class="content-paragraph" style="margin-bottom:1rem;">
+      <span class="nrvq-grad">NeuroRVQ</span> achieves state-of-the-art performance on five BCI downstream tasks, outperforming existing Large Brainwave Models by up to 15%. Results are based on a rigorous subject-independent cross-validation benchmark.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Model</th><th>Motor</th><th>ERP</th><th>Memory</th><th>Sleep</th><th>Eyes</th><th>Mean</th><th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NeuroGPT</td><td>0.682</td><td>0.757</td><td class="best">0.597</td><td>0.674</td><td>0.827</td><td>0.707</td><td>79.5M</td>
+          </tr>
+          <tr>
+            <td>CBraMod</td><td>0.614</td><td>0.777</td><td>0.574</td><td>0.635</td><td>0.839</td><td>0.688</td><td>4.9M</td>
+          </tr>
+          <tr>
+            <td>BIOT</td><td>0.443</td><td>0.500</td><td>0.510</td><td>—</td><td>0.763</td><td>—</td><td>3.2M</td>
+          </tr>
+          <tr>
+            <td>MIRepNet</td><td>0.689</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+          </tr>
+          <tr>
+            <td>LaBraM</td><td>0.630</td><td>0.822</td><td>0.526</td><td>0.652</td><td>0.799</td><td>0.686</td><td>5.8M</td>
+          </tr>
+          <tr>
+            <td>EEGPT</td><td>0.313</td><td>0.668</td><td>0.520</td><td>0.634</td><td>0.797</td><td>0.587</td><td>25.7M</td>
+          </tr>
+          <tr>
+            <td><strong><span class="nrvq-grad">NeuroRVQ</span></strong></td>
+            <td class="best">0.700</td>
+            <td class="best">0.876</td>
+            <td>0.574</td>
+            <td class="best">0.728</td>
+            <td class="best">0.869</td>
+            <td class="best">0.749</td>
+            <td>5.9M</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.85rem;color:#888;margin-top:0.5rem;text-align:center;">
+      Benchmark from <a href="https://ieeexplore.ieee.org/document/11204282" target="_blank" style="color:var(--accent);">Assessing the Capabilities of Large Brainwave Foundation Models</a> (IEEE MLSP 2025).
+    </p>
+  </div>
+</section>
+
+<!-- Research Timeline -->
+<section class="section alt-section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Research Timeline</h2>
+    <p class="content-paragraph" style="text-align:center;margin-bottom:2rem;">
+      The journey of publications that shaped the development of <span class="nrvq-grad">NeuroRVQ</span>.
+    </p>
+
+    <div class="timeline">
+
+      <!-- 0 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#4ECFFF;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#4ECFFF;color:#1a1a2e;">Journal of Neural Engineering 2024</span>
+          <h4 class="timeline-title">A Causal Perspective on Brainwave Modeling for Brain-Computer Interfaces</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Yannis Panagakis, Georgios Zoumpourlis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Introduced a causal reasoning framework for BCI paradigms, providing step-by-step guidelines for designing robust brainwave decoders that generalize beyond controlled laboratory settings.</p>
+          <a href="https://iopscience.iop.org/article/10.1088/1741-2552/ad3eb5/meta" target="_blank" class="timeline-link">J. Neural Eng. &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 1 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#4ECFFF;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#4ECFFF;color:#1a1a2e;">NeurIPS 2024 Workshop</span>
+          <h4 class="timeline-title">A Causal Perspective in Brainwave Foundation Models</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Examined LBM training through causal reasoning, identifying key challenges impacting performance and generalization in BCI applications.</p>
+          <a href="https://openreview.net/pdf?id=IGSDECEKt8" target="_blank" class="timeline-link">CaLM Workshop &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#4ECFFF;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#4ECFFF;color:#1a1a2e;">NeurIPS 2024 Workshop</span>
+          <h4 class="timeline-title">Position: Addressing Ethical Challenges and Safety Risks in GenAI-Powered BCIs</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>*, Georgios Zoumpourlis*, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Identified safety and ethical concerns in GenAI for BCIs, including synthetic neural activity, behaviour profiling, and privacy risks, along with mitigation strategies.</p>
+          <a href="https://openreview.net/pdf?id=N8CIlpniXs" target="_blank" class="timeline-link">GenAI for Health Workshop &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#7B6FE8;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#7B6FE8;">IEEE MLSP 2025 · ICLR 2025 Workshop</span>
+          <h4 class="timeline-title">Assessing the Capabilities of Large Brainwave Foundation Models</h4>
+          <p class="timeline-authors">Na Lee*, Stylianos Bakas*, <strong>Konstantinos Barmpas</strong>, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Proposed a rigorous benchmarking protocol using causal reasoning and subject-independent cross-validation to properly evaluate LBMs across diverse BCI paradigms.</p>
+          <a href="https://ieeexplore.ieee.org/document/11204282" target="_blank" class="timeline-link">IEEE Xplore &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#7B6FE8;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#7B6FE8;">ICML 2025</span>
+          <h4 class="timeline-title">Are Large Brainwave Foundation Models Capable Yet? Insights from Fine-tuning</h4>
+          <p class="timeline-authors">Na Lee*, <strong>Konstantinos Barmpas</strong>*, Yannis Panagakis, Dimitrios Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Comprehensively evaluated LBMs through fine-tuning experiments, revealing marginal gains over traditional architectures and pioneering LoRA adaptation for brainwave models.</p>
+          <a href="https://proceedings.mlr.press/v267/lee25a.html" target="_blank" class="timeline-link">ICML Proceedings &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#C56FE8;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#C56FE8;">Survey 2025</span>
+          <h4 class="timeline-title">A Comprehensive Review of Biosignal Foundation Models</h4>
+          <p class="timeline-authors">Na Lee, <strong>Konstantinos Barmpas</strong>, Alexandros Koliousis, Yannis Panagakis, Dimitrios Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">A structured survey covering <span class="eeg">EEG</span>, <span class="ecg">ECG</span>, <span class="emg">EMG</span>, EOG, and PPG foundation models — reviewing data processing, architectures, pre-training paradigms, and open challenges.</p>
+          <a href="https://www.techrxiv.org/users/1000230/articles/1360654-a-comprehensive-review-of-biosignal-foundation-models" target="_blank" class="timeline-link">TechRxiv &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#E06FCA;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#E06FCA;">NeurIPS 2025 Workshop</span>
+          <h4 class="timeline-title">Subject-Aware Contrastive Learning for EEG Foundation Models</h4>
+          <p class="timeline-authors">Antonis Karantonis*, <strong>Konstantinos Barmpas</strong>*, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou, Yannis Panagakis</p>
+          <p class="timeline-desc">Introduced the first subject-aware contrastive EEG foundation model, leveraging intra-subject variability across sessions as a natural supervisory signal.</p>
+          <a href="https://openreview.net/pdf?id=MdgBATPjEu" target="_blank" class="timeline-link">Learning from Time Series for Health Workshop &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#E06FCA;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#E06FCA;">NeurIPS 2025 Workshop</span>
+          <h4 class="timeline-title">Advancing Brainwave Modeling with a Codebook-Based Foundation Model</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>*, Na Lee*, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Introduced LaBraM++, an enhanced LBM with principled signal processing improvements to the tokenizer, achieving 6% improvement over the original architecture.</p>
+          <a href="https://openreview.net/pdf?id=rKR2sH50ZE" target="_blank" class="timeline-link">Foundation Models for the Brain and Body Workshop &rarr;</a>
+        </div>
+      </div>
+
+      <!-- NeuroRVQ -->
+      <div class="timeline-item timeline-highlight">
+        <div class="timeline-marker timeline-marker-star">&#9733;</div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#363636;">2025</span>
+          <h4 class="timeline-title" style="font-size:1.15rem;"><span class="nrvq-grad">NeuroRVQ</span>: Multi-Scale EEG Tokenization for Generative Large Brainwave Models</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Na Lee, Alexandros Koliousis, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Culmination of all prior insights — a state-of-the-art codebook-based tokenizer with multi-scale RVQ and phase-aware training, powering a new generation of Large Brainwave Models.</p>
+          <a href="https://arxiv.org/abs/2510.13068" target="_blank" class="timeline-link">arXiv &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">BibTeX</h2>
+    <div class="bibtex-box" id="bibtex">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-text').innerText)">
+        <i class="fas fa-copy"></i> Copy
+      </button>
+<pre id="bibtex-text" style="margin:0;white-space:pre-wrap;">@misc{neurorvq,
+      title={NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models}, 
+      author={Konstantinos Barmpas and Na Lee and Alexandros Koliousis and Yannis Panagakis and Dimitrios A. Adamos and Nikolaos Laskaris and Stefanos Zafeiriou},
+      year={2025},
+      eprint={2510.13068},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2510.13068}, 
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
 <footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
-    </div>
+  <div class="container has-text-centered">
+    <p>The source code of this website is borrowed from <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a>.</p>
   </div>
 </footer>
 
