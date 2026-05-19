@@ -450,8 +450,8 @@
         <span class="author-block"><a href="https://www.linkedin.com/in/will-raf/" target="_blank">William Raftery</a><sup>1</sup>,</span>
         <span class="author-block"><a href="http://users.uoa.gr/~yannisp/" target="_blank">Yannis Panagakis</a><sup>2,3,4</sup>,</span>
         <span class="author-block"><a href="https://profiles.imperial.ac.uk/d.adamos" target="_blank">Dimitrios Adamos</a><sup>1,2</sup>,</span>
-        <span class="author-block"><a href="https://people.auth.gr/laskaris/?lang=en" target="_blank">Nikolaos Laskaris</a><sup>2,6</sup>,</span>
-        <span class="author-block"><a href="https://akoliousis.com" target="_blank">Alexandros Koliousis</a><sup>5</sup>,</span>
+        <span class="author-block"><a href="https://people.auth.gr/laskaris/?lang=en" target="_blank">Nikolaos Laskaris</a><sup>2,5</sup>,</span>
+        <span class="author-block"><a href="https://akoliousis.com" target="_blank">Alexandros Koliousis</a><sup>6</sup>,</span>
         <span class="author-block"><a href="https://profiles.imperial.ac.uk/d.farina" target="_blank">Dario Farina</a><sup>1</sup>,</span>
         <span class="author-block"><a href="https://profiles.imperial.ac.uk/s.zafeiriou" target="_blank">Stefanos Zafeiriou</a><sup>1,2</sup></span>
       </div>
@@ -461,12 +461,12 @@
         <sup>2</sup>Cogitat<br>
         <sup>3</sup>National and Kapodistrian University of Athens&emsp;
         <sup>4</sup>Archimedes Research Unit<br>
-        <sup>5</sup>Northeastern University London&emsp;
-        <sup>6</sup>Aristotle University of Thessaloniki
+        <sup>5</sup>Aristotle University of Thessaloniki&emsp;
+        <sup>6</sup>Northeastern University London
       </div>
 
       <div class="publication-links">
-        <a class="button is-dark is-rounded" href="https://arxiv.org/abs/2510.13068" target="_blank">
+        <a class="button is-dark is-rounded" href="https://arxiv.org/abs/2510.13068v4" target="_blank">
           <span class="icon"><i class="fas fa-file-pdf"></i></span>
           <span>arXiv</span>
         </a>
@@ -497,13 +497,6 @@
     <h2 class="section-title has-text-centered">Abstract</h2>
     <p class="content-paragraph">
     Biosignals such as electroencephalography (<span class="eeg">EEG</span>), electrocardiography (<span class="ecg">ECG</span>), and electromyography (<span class="emg">EMG</span>) encode physiological activity across multiple temporal and spectral scales, yielding representations that are rich but challenging for machine learning. Foundation models trained to predict masked signal tokens have shown promise in learning generalizable biosignal representations, yet their performance depends on the tokenizer's ability to preserve high-frequency dynamics and reconstruct signals with high fidelity. We introduce <span class="nrvq-grad">NeuroRVQ</span>, a modality-adaptive biosignal tokenizer family designed for high-fidelity signal reconstruction. To capture the full frequency spectrum, <span class="nrvq-grad">NeuroRVQ</span> decomposes biosignals into frequency-specific representations via multi-scale temporal convolutions, each encoded into hierarchical RVQ codebooks to preserve high-frequency detail, combined with a novel phase-aware training loss that respects the circular topology of Fourier phase. By tuning the temporal resolution, number and size of temporal kernels and RVQ depth, this design adapts to the spectro-temporal characteristics of each biosignal modality. To validate that tokenizer quality drives downstream performance, we train a simple masked-token foundation model for each modality (<span class="nrvq-grad">NeuroRVQ</span>-FM) using the corresponding <span class="nrvq-grad">NeuroRVQ</span> tokenizer. The <span class="nrvq-grad">NeuroRVQ</span>-FM family achieves competitive or superior downstream performance compared to existing modality-specific foundation models, demonstrating that high-fidelity tokenization is a critical factor for effective biosignal modeling.
-    
-<!--      Electroencephalography (EEG) captures neural activity across multiple temporal and spectral scales, yielding signals that are rich but complex for representation learning. Recently, EEG foundation models trained to predict masked signal-tokens have shown promise for learning generalizable representations. However, their performance is hindered by their signal tokenization modules. Existing neural tokenizers fail to preserve high-frequency dynamics, limiting their ability to reconstruct EEG signals with high fidelity.-->
-<!--      We introduce <strong><span class="nrvq-grad">NeuroRVQ</span></strong>, a scalable Large Brainwave Model (LBM) centered on a codebook-based tokenizer. Our tokenizer integrates:-->
-<!--      (i)&nbsp;multi-scale feature extraction modules that capture the full frequency neural spectrum;-->
-<!--      (ii)&nbsp;hierarchical residual vector quantization (RVQ) codebooks for high-resolution encoding; and-->
-<!--      (iii)&nbsp;a unit circle phase-aware loss for efficient training.-->
-<!--      This design enables efficient EEG compression while supporting accurate reconstruction across all frequency bands, leading to robust generative masked modeling. Our empirical results demonstrate that <span class="nrvq-grad">NeuroRVQ</span> achieves lower reconstruction error and outperforms existing LBMs on a variety of downstream tasks. More broadly, <span class="nrvq-grad">NeuroRVQ</span> establishes a strong prior for codebook-based general-purpose brainwave models, enabling advances in neural decoding, generative modeling, and multimodal biosignal integration.-->
     </p>
   </div>
 </section>
