@@ -5,9 +5,9 @@ This is the repository that contains the source code for the [NeuroRVQ project p
 If you find NeuroRVQ useful for your work please cite:
 ```bibtex
 @misc{neurorvq,
-      title={NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models}, 
-      author={Konstantinos Barmpas and Na Lee and Alexandros Koliousis and Yannis Panagakis and Dimitrios A. Adamos and Nikolaos Laskaris and Stefanos Zafeiriou},
-      year={2025},
+      title={NeuroRVQ: Multi-Scale Biosignal Tokenization for Generative Foundation Models}, 
+      author={Konstantinos Barmpas and Na Lee and Dimitrios Chalatsis and William Raftery and Yannis Panagakis and Dimitrios A. Adamos and Nikolaos Laskaris and Alexandros Koliousis and Dario Farina and Stefanos Zafeiriou},
+      year={2026},
       eprint={2510.13068},
       archivePrefix={arXiv},
       primaryClass={cs.LG},
