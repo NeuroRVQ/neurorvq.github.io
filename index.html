@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models">
+  <meta name="description" content="NeuroRVQ: Multi-Scale Biosignal Tokenization for Generative Foundation Models">
   <style>
     .nrvq-grad {
       background: linear-gradient(90deg, #4ECFFF, #7B6FE8, #C56FE8, #E06FCA);
@@ -20,7 +20,7 @@
   </style>
   <meta name="keywords" content="NeuroRVQ, EEG, tokenizer, foundation model, brainwave, RVQ, biosignals">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models</title>
+  <title>NeuroRVQ: Multi-Scale Biosignal Tokenization for Generative Foundation Models</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
@@ -440,25 +440,28 @@
       </div>
 
       <h1 class="publication-title">
-        <span style="background:linear-gradient(90deg, #4ECFFF, #7B6FE8, #C56FE8, #E06FCA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">NeuroRVQ</span>: Multi-Scale EEG Tokenization for Generative Large Brainwave Models
+        <span style="background:linear-gradient(90deg, #4ECFFF, #7B6FE8, #C56FE8, #E06FCA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">NeuroRVQ</span>: Multi-Scale Biosignal Tokenization for Generative Foundation Models
       </h1>
 
       <div class="publication-authors">
         <span class="author-block"><a href="https://www.barmpas.com" target="_blank">Konstantinos Barmpas</a><sup>1,2</sup>,</span>
         <span class="author-block"><a href="https://www.linkedin.com/in/na-lee-57777387/" target="_blank">Na Lee</a><sup>1,2</sup>,</span>
-        <span class="author-block"><a href="https://akoliousis.com" target="_blank">Alexandros Koliousis</a><sup>3</sup>,</span>
-        <span class="author-block"><a href="http://users.uoa.gr/~yannisp/" target="_blank">Yannis Panagakis</a><sup>2,4,5</sup>,</span>
+        <span class="author-block"><a href="http://dhalatsis.github.io" target="_blank">Dimitrios Chalatsis</a><sup>1</sup>,</span>
+        <span class="author-block"><a href="https://www.linkedin.com/in/will-raf/" target="_blank">William Raftery</a><sup>1</sup>,</span>
+        <span class="author-block"><a href="http://users.uoa.gr/~yannisp/" target="_blank">Yannis Panagakis</a><sup>2,3,4</sup>,</span>
         <span class="author-block"><a href="https://profiles.imperial.ac.uk/d.adamos" target="_blank">Dimitrios Adamos</a><sup>1,2</sup>,</span>
         <span class="author-block"><a href="https://people.auth.gr/laskaris/?lang=en" target="_blank">Nikolaos Laskaris</a><sup>2,6</sup>,</span>
+        <span class="author-block"><a href="https://akoliousis.com" target="_blank">Alexandros Koliousis</a><sup>5</sup>,</span>
+        <span class="author-block"><a href="https://profiles.imperial.ac.uk/d.farina" target="_blank">Dario Farina</a><sup>1</sup>,</span>
         <span class="author-block"><a href="https://profiles.imperial.ac.uk/s.zafeiriou" target="_blank">Stefanos Zafeiriou</a><sup>1,2</sup></span>
       </div>
 
       <div class="publication-affiliations">
         <sup>1</sup>Imperial College London&emsp;
-        <sup>2</sup>Cogitat&emsp;
-        <sup>3</sup>Northeastern University London<br>
-        <sup>4</sup>National and Kapodistrian University of Athens&emsp;
-        <sup>5</sup>Archimedes Research Unit<br>
+        <sup>2</sup>Cogitat<br>
+        <sup>3</sup>National and Kapodistrian University of Athens&emsp;
+        <sup>4</sup>Archimedes Research Unit<br>
+        <sup>5</sup>Northeastern University London&emsp;
         <sup>6</sup>Aristotle University of Thessaloniki
       </div>
 
@@ -493,12 +496,14 @@
   <div class="container is-max-desktop">
     <h2 class="section-title has-text-centered">Abstract</h2>
     <p class="content-paragraph">
-      Electroencephalography (EEG) captures neural activity across multiple temporal and spectral scales, yielding signals that are rich but complex for representation learning. Recently, EEG foundation models trained to predict masked signal-tokens have shown promise for learning generalizable representations. However, their performance is hindered by their signal tokenization modules. Existing neural tokenizers fail to preserve high-frequency dynamics, limiting their ability to reconstruct EEG signals with high fidelity.
-      We introduce <strong><span class="nrvq-grad">NeuroRVQ</span></strong>, a scalable Large Brainwave Model (LBM) centered on a codebook-based tokenizer. Our tokenizer integrates:
-      (i)&nbsp;multi-scale feature extraction modules that capture the full frequency neural spectrum;
-      (ii)&nbsp;hierarchical residual vector quantization (RVQ) codebooks for high-resolution encoding; and
-      (iii)&nbsp;a unit circle phase-aware loss for efficient training.
-      This design enables efficient EEG compression while supporting accurate reconstruction across all frequency bands, leading to robust generative masked modeling. Our empirical results demonstrate that <span class="nrvq-grad">NeuroRVQ</span> achieves lower reconstruction error and outperforms existing LBMs on a variety of downstream tasks. More broadly, <span class="nrvq-grad">NeuroRVQ</span> establishes a strong prior for codebook-based general-purpose brainwave models, enabling advances in neural decoding, generative modeling, and multimodal biosignal integration.
+    Biosignals such as electroencephalography (<span class="eeg">EEG</span>), electrocardiography (<span class="ecg">ECG</span>), and electromyography (<span class="emg">EMG</span>) encode physiological activity across multiple temporal and spectral scales, yielding representations that are rich but challenging for machine learning. Foundation models trained to predict masked signal tokens have shown promise in learning generalizable biosignal representations, yet their performance depends on the tokenizer's ability to preserve high-frequency dynamics and reconstruct signals with high fidelity. We introduce <span class="nrvq-grad">NeuroRVQ</span>, a modality-adaptive biosignal tokenizer family designed for high-fidelity signal reconstruction. To capture the full frequency spectrum, <span class="nrvq-grad">NeuroRVQ</span> decomposes biosignals into frequency-specific representations via multi-scale temporal convolutions, each encoded into hierarchical RVQ codebooks to preserve high-frequency detail, combined with a novel phase-aware training loss that respects the circular topology of Fourier phase. By tuning the temporal resolution, number and size of temporal kernels and RVQ depth, this design adapts to the spectro-temporal characteristics of each biosignal modality. To validate that tokenizer quality drives downstream performance, we train a simple masked-token foundation model for each modality (<span class="nrvq-grad">NeuroRVQ</span>-FM) using the corresponding <span class="nrvq-grad">NeuroRVQ</span> tokenizer. The <span class="nrvq-grad">NeuroRVQ</span>-FM family achieves competitive or superior downstream performance compared to existing modality-specific foundation models, demonstrating that high-fidelity tokenization is a critical factor for effective biosignal modeling.
+    
+<!--      Electroencephalography (EEG) captures neural activity across multiple temporal and spectral scales, yielding signals that are rich but complex for representation learning. Recently, EEG foundation models trained to predict masked signal-tokens have shown promise for learning generalizable representations. However, their performance is hindered by their signal tokenization modules. Existing neural tokenizers fail to preserve high-frequency dynamics, limiting their ability to reconstruct EEG signals with high fidelity.-->
+<!--      We introduce <strong><span class="nrvq-grad">NeuroRVQ</span></strong>, a scalable Large Brainwave Model (LBM) centered on a codebook-based tokenizer. Our tokenizer integrates:-->
+<!--      (i)&nbsp;multi-scale feature extraction modules that capture the full frequency neural spectrum;-->
+<!--      (ii)&nbsp;hierarchical residual vector quantization (RVQ) codebooks for high-resolution encoding; and-->
+<!--      (iii)&nbsp;a unit circle phase-aware loss for efficient training.-->
+<!--      This design enables efficient EEG compression while supporting accurate reconstruction across all frequency bands, leading to robust generative masked modeling. Our empirical results demonstrate that <span class="nrvq-grad">NeuroRVQ</span> achieves lower reconstruction error and outperforms existing LBMs on a variety of downstream tasks. More broadly, <span class="nrvq-grad">NeuroRVQ</span> establishes a strong prior for codebook-based general-purpose brainwave models, enabling advances in neural decoding, generative modeling, and multimodal biosignal integration.-->
     </p>
   </div>
 </section>
@@ -511,32 +516,26 @@
       <div class="pipeline-step">
         <div class="step-number" style="background:#4ECFFF;color:#1a1a2e;">&#10003;</div>
         <div class="step-content">
-          <h4>First High-Fidelity Codebook Tokenizer for EEG</h4>
-          <p>While discrete codebook-based tokenizers work well in vision and audio, <span class="nrvq-grad">NeuroRVQ</span> is the first to achieve faithful signal reconstruction for brain signals.</p>
+          <h4>Modality-Adaptive Multi-Scale Tokenizer</h4>
+          <p>A modality-adaptive multiscale tokenizer architecture that decomposes biosignals into
+          frequency-specific representations via temporal convolutions with varying kernel sizes and
+          encodes each frequency scale into hierarchical Residual Vector Quantization (RVQ) codebooks,enabling high-fidelity signal reconstruction across <span class="eeg">EEG</span>, <span class="ecg">ECG</span> and <span class="emg">EMG</span>. By tuning the temporal resolution, number and size of temporal kernels, and RVQ depth, this architecture adapts to the spectro-temporal characteristics of each biosignal modality.</p>
         </div>
       </div>
       <div class="pipeline-step">
         <div class="step-number" style="background:#7B6FE8;">&#10003;</div>
         <div class="step-content">
-          <h4>Multi-Scale Frequency Preservation</h4>
-          <p>Unlike existing tokenizers that lose high-frequency dynamics, <span class="nrvq-grad">NeuroRVQ</span> captures and reconstructs the full neural spectrum from delta to gamma bands.</p>
+          <h4>Phase-Aware Training Loss</h4>
+          <p>A phase-aware training loss that reconstructs the Fourier spectrum through three complementary components: a log-amplitude loss for Fourier amplitude to emphasize high-frequency content, a temporal-domain regularization loss and a novel phase loss that respects the circular topology of phase angles by leveraging cosine similarity for directional alignment</p>
         </div>
       </div>
       <div class="pipeline-step">
         <div class="step-number" style="background:#C56FE8;">&#10003;</div>
         <div class="step-content">
-          <h4>Cross-Modality Generalization</h4>
-          <p>Preliminary results on <span class="emg">EMG</span> and <span class="ecg">ECG</span> demonstrate <span class="nrvq-grad">NeuroRVQ</span> tokenizer's potential to extend beyond <span class="eeg">EEG</span> to general-purpose biosignal modeling.</p>
+          <h4>Simple masked-token foundation model (<span class="nrvq-grad">NeuroRVQ</span>-FM)</h4>
+          <p>A simple masked-token foundation model (<span class="nrvq-grad">NeuroRVQ</span>-FM) for each modality that leverages the corresponding <span class="nrvq-grad">NeuroRVQ</span> tokenizer during pre-training and achieves competitive or superior downstream performance compared to existing modality-specific foundation models, demonstrating that high-fidelity tokenization (rather than model scale or architectural complexity) is a critical ingredient for effective biosignal modeling.</p>
         </div>
       </div>
-      <div class="pipeline-step">
-        <div class="step-number" style="background:#E06FCA;">&#10003;</div>
-        <div class="step-content">
-          <h4>Up to 15% Improvement on BCI Tasks</h4>
-          <p><span class="nrvq-grad">NeuroRVQ</span> foundation model outperforms all existing LBMs across five diverse downstream tasks while using only 5.9M parameters.</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -559,7 +558,7 @@
         <div class="step-number">1</div>
         <div class="step-content">
           <h4>Multi-Scale Temporal Encoding</h4>
-          <p>Temporal convolutions with varying kernel sizes capture features across multiple frequency resolutions — from slow delta waves to fast gamma oscillations.</p>
+          <p>Temporal convolutions with varying kernel sizes capture features across multiple frequency resolutions.</p>
         </div>
       </div>
       <div class="pipeline-step">
@@ -580,7 +579,7 @@
         <div class="step-number">4</div>
         <div class="step-content">
           <h4>Phase-Aware Reconstruction</h4>
-          <p>A decoder reconstructs input patches using the Fourier spectrum, supervised by a unit circle loss that jointly captures amplitude and phase information.</p>
+          <p>A decoder reconstructs input patches using the Fourier spectrum, supervised by a phase-aware training loss that jointly captures amplitude and phase information.</p>
         </div>
       </div>
     </div>
@@ -593,6 +592,79 @@
       <img src="./static/images/foundation_model.png" alt="NeuroRVQ Foundation Model Architecture" class="method-image">
       <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Figure 2: The <span class="nrvq-grad">NeuroRVQ</span> foundation model with masked-token prediction and symmetric masking strategy.</figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- Scaling Analysis -->
+<section class="section alt-section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Modality-Specific Configuration &amp; Scaling Analysis</h2>
+    <p class="content-paragraph" style="text-align:center;margin-bottom:1.5rem;">
+      To determine the optimal tokenizer configuration for each modality, we conduct a systematic scaling analysis over the number of temporal branches and RVQ codebooks per branch. Two consistent patterns emerge across all modalities: deeper residual quantization yields large reductions in reconstruction error, and adding temporal branches provides complementary gains by decomposing the signal into frequency-specific representations that are each easier to quantize. The optimal balance between these two mechanisms is modality-dependent.
+    </p>
+
+    <figure style="text-align:center;">
+      <img src="./static/images/scaling_analysis.png" alt="Scaling Analysis across EEG, ECG and EMG" style="max-width:90%;border-radius:8px;margin:1rem auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Figure 3: Scaling analysis — mean squared error (MSE) reconstruction performance and number of trainable parameters for <span class="nrvq-grad">NeuroRVQ</span> with various numbers of temporal branches and RVQ codebooks per branch across <span class="eeg">EEG</span>, <span class="ecg">ECG</span> and <span class="emg">EMG</span>.</figcaption>
+    </figure>
+
+    <figure style="text-align:center;margin-top:2rem;">
+      <img src="./static/images/training_curves.png" alt="Validation MSE during NeuroRVQ tokenizer training" style="max-width:90%;border-radius:8px;margin:1rem auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Figure 4: Validation mean squared error (MSE) during <span class="nrvq-grad">NeuroRVQ</span> tokenizer training across all three modalities. <span class="ecg">ECG</span> exhibits the fastest convergence consistent with its stereotyped morphology, <span class="eeg">EEG</span> converges to a stable plateau reflecting its richer spectral structure, and <span class="emg">EMG</span> converges more gradually consistent with its broadband nature.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Phase-Aware Training Loss -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="section-title has-text-centered">Phase-Aware Training Loss</h2>
+    <p class="content-paragraph" style="text-align:center;margin-bottom:1.5rem;">
+      Architecture alone does not account for <span class="nrvq-grad">NeuroRVQ</span>'s reconstruction gains — the training loss is equally critical. The tokenizer is trained end-to-end with a composite objective operating in the Fourier domain that combines three complementary components: a log-amplitude loss that compresses dynamic range and emphasizes high-frequency content, a novel phase loss based on cosine similarity that respects the circular topology of Fourier phase angles, and a temporal-domain regularization term.
+    </p>
+
+    <figure style="text-align:center;margin:1.5rem auto;">
+      <img src="./static/images/equation_loss.png" alt="NeuroRVQ Phase-Aware Training Loss" style="max-width:70%;margin:0 auto;display:block;">
+    </figure>
+
+    <!-- Ablation Table B.1 -->
+    <h3 style="font-family:'Google Sans',sans-serif;font-weight:600;font-size:1.15rem;margin-top:2.5rem;margin-bottom:0.5rem;text-align:center;">Component Ablation Study</h3>
+    <p class="content-paragraph" style="text-align:center;margin-bottom:1.25rem;font-size:0.92rem;">
+      Starting from a simple baseline (single branch, single codebook, naive MSE on phase and amplitude), each <span class="nrvq-grad">NeuroRVQ</span> component is added incrementally. The phase-aware loss delivers the largest single improvement, and the full combination achieves up to a 43× reduction in reconstruction error.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Configuration</th><th><span class="eeg">EEG</span></th><th><span class="ecg">ECG</span></th><th><span class="emg">EMG</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1-Branch, 1CB, MSE Phase + MSE A</td><td>1.509</td><td>1.956</td><td>1.996</td>
+          </tr>
+          <tr>
+            <td>4-Branch, 8CB, MSE Phase + MSE A</td><td>0.946</td><td>1.417</td><td>1.651</td>
+          </tr>
+          <tr>
+            <td>4-Branch, 8CB, MSE Phase + <span style="color:#b91c1c;">log(A)</span> + <span style="color:#d97706;">Temporal</span></td><td>0.603</td><td>0.843</td><td>1.000</td>
+          </tr>
+          <tr>
+            <td>4-Branch, 8CB, <span style="color:#1a56db;">Phase Loss</span> + MSE A</td><td>0.167</td><td>0.287</td><td>0.903</td>
+          </tr>
+          <tr>
+            <td><strong>4-Branch, 8CB, <span style="color:#1a56db;">Phase Loss</span> + <span style="color:#b91c1c;">log(A)</span> + <span style="color:#d97706;">Temporal</span></strong></td>
+            <td class="best"><strong>0.035</strong></td>
+            <td class="best"><strong>0.115</strong></td>
+            <td class="best"><strong>0.447</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem;color:#888;margin-top:0.5rem;text-align:center;">
+      Validation MSE averaged over the last 10 training epochs. The full <span class="nrvq-grad">NeuroRVQ</span> configuration (row 5) achieves a 43× reduction for <span class="eeg">EEG</span>, 17× for <span class="ecg">ECG</span> and 4.5× for <span class="emg">EMG</span> relative to the baseline.
+    </p>
   </div>
 </section>
 
@@ -628,6 +700,27 @@
         <figcaption style="font-size:0.88rem;margin-top:0.6rem;"><span class="ecg">ECG</span></figcaption>
       </figure>
     </div>
+
+    <!-- Reconstruction Examples (Figures 8–10) -->
+    <h3 style="font-family:'Google Sans',sans-serif;font-weight:600;font-size:1.15rem;margin-top:2.5rem;margin-bottom:0.5rem;text-align:center;">Reconstruction Examples</h3>
+    <p class="content-paragraph" style="text-align:center;margin-bottom:1.5rem;font-size:0.92rem;">
+      Sample reconstructed signals from the validation set using the <span class="nrvq-grad">NeuroRVQ</span> tokenizer across all three modalities. Blue lines denote the input signal and orange the reconstructed signal.
+    </p>
+
+    <figure style="text-align:center;margin-top:1.5rem;">
+      <img src="./static/images/recon_examples_ecg.png" alt="ECG Reconstruction Examples" style="max-width:85%;border-radius:8px;margin:0 auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Reconstructed <span class="ecg">ECG</span> signals from the validation set.</figcaption>
+    </figure>
+
+    <figure style="text-align:center;margin-top:2rem;">
+      <img src="./static/images/recon_examples_eeg.png" alt="EEG Reconstruction Examples" style="max-width:85%;border-radius:8px;margin:0 auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Reconstructed <span class="eeg">EEG</span> signals from the validation set.</figcaption>
+    </figure>
+
+    <figure style="text-align:center;margin-top:2rem;">
+      <img src="./static/images/recon_examples_emg.png" alt="EMG Reconstruction Examples" style="max-width:85%;border-radius:8px;margin:0 auto;display:block;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <figcaption style="font-size:0.88rem;color:#888;margin-top:0.5rem;">Reconstructed <span class="emg">EMG</span> signals from the validation set.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -638,15 +731,15 @@
 
     <table class="modality-table" style="width:100%;">
       <thead>
-        <tr><th>Model Version</th><th>Parameters</th><th>Modality</th><th>Status</th></tr>
+        <tr><th>Model Version</th><th>Backbone</th><th>Modality</th><th>Status</th></tr>
       </thead>
       <tbody>
-        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span>-tokenizer-v1</td><td>76M</td><td><span class="eeg">EEG</span></td><td>&#9989; Released</td></tr>
-        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span>-foundation-model-v1</td><td>6M</td><td><span class="eeg">EEG</span></td><td>&#9989; Released</td></tr>
-        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span>-tokenizer-v1</td><td>144M</td><td><span class="emg">EMG</span></td><td>&#9989; Released</td></tr>
-        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span>-foundation-model-v1</td><td>6M</td><td><span class="emg">EMG</span></td><td>&#9989; Released</td></tr>
-        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span>-tokenizer-v1</td><td>76M</td><td><span class="ecg">ECG</span></td><td>&#9989; Released</td></tr>
-        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span>-foundation-model-v1</td><td>6M</td><td><span class="ecg">ECG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span>-tokenizer</td><td>76M</td><td><span class="eeg">EEG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span>-FM</td><td>5.9M</td><td><span class="eeg">EEG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span>-tokenizer</td><td>76M</td><td><span class="ecg">ECG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span>-FM</td><td>264K</td><td><span class="ecg">ECG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span>-tokenizer</td><td>144M</td><td><span class="emg">EMG</span></td><td>&#9989; Released</td></tr>
+        <tr><td><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span>-FM</td><td>5.9M</td><td><span class="emg">EMG</span></td><td>&#9989; Released</td></tr>
       </tbody>
     </table>
   </div>
@@ -659,7 +752,7 @@
 
     <h3 style="font-family:'Google Sans',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:0.75rem;"><span class="eeg">EEG</span> Downstream Performance</h3>
     <p class="content-paragraph" style="margin-bottom:1rem;">
-      <span class="nrvq-grad">NeuroRVQ</span> achieves state-of-the-art performance on five BCI downstream tasks, outperforming existing Large Brainwave Models by up to 15%. Results are based on a rigorous subject-independent cross-validation benchmark.
+      <span class="nrvq-grad">NeuroRVQ</span> achieves state-of-the-art performance on five BCI downstream tasks, outperforming the next-best model by over 4 percentage points in mean balanced accuracy. Results are based on a rigorous subject-independent cross-validation benchmark.
     </p>
 
     <div style="overflow-x:auto;">
@@ -683,13 +776,16 @@
             <td>MIRepNet</td><td>0.689</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
           </tr>
           <tr>
+            <td>BrainOmni</td><td>0.585</td><td>0.723</td><td>0.518</td><td>—</td><td>0.852</td><td>—</td><td>—</td>
+          </tr>
+          <tr>
             <td>LaBraM</td><td>0.630</td><td>0.822</td><td>0.526</td><td>0.652</td><td>0.799</td><td>0.686</td><td>5.8M</td>
           </tr>
           <tr>
             <td>EEGPT</td><td>0.313</td><td>0.668</td><td>0.520</td><td>0.634</td><td>0.797</td><td>0.587</td><td>25.7M</td>
           </tr>
           <tr>
-            <td><strong><span class="nrvq-grad">NeuroRVQ</span></strong></td>
+            <td><strong><span class="nrvq-grad">NeuroRVQ</span>-<span class="eeg">EEG</span></strong></td>
             <td class="best">0.700</td>
             <td class="best">0.876</td>
             <td>0.574</td>
@@ -705,6 +801,78 @@
     <p style="font-size:0.85rem;color:#888;margin-top:0.5rem;text-align:center;">
       Benchmark from <a href="https://ieeexplore.ieee.org/document/11204282" target="_blank" style="color:var(--accent);">Assessing the Capabilities of Large Brainwave Foundation Models</a> (IEEE MLSP 2025).
     </p>
+
+    <!-- ECG Downstream -->
+    <h3 style="font-family:'Google Sans',sans-serif;font-weight:600;font-size:1.15rem;margin-top:2.5rem;margin-bottom:0.75rem;"><span class="ecg">ECG</span> Downstream Performance</h3>
+    <p class="content-paragraph" style="margin-bottom:1rem;">
+      <span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span> achieves high balanced accuracy on both PTB-XL settings, doubling the balanced accuracy of HuBERT-ECG on the fine-grained 43-class task and substantially outperforming all baselines where class imbalance is most severe.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th rowspan="2">Model</th><th colspan="2">5-class PTB-XL</th><th colspan="2">43-class PTB-XL</th>
+          </tr>
+          <tr>
+            <th>Accuracy</th><th>BAcc</th><th>Accuracy</th><th>BAcc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>HuBERT-ECG</td><td>72.60</td><td>60.23</td><td>62.49</td><td>20.71</td>
+          </tr>
+          <tr>
+            <td>ECGFounder</td><td class="best">76.55</td><td>65.39</td><td>65.51</td><td>28.96</td>
+          </tr>
+          <tr>
+            <td><strong><span class="nrvq-grad">NeuroRVQ</span>-<span class="ecg">ECG</span></strong></td>
+            <td>70.19</td>
+            <td class="best">64.50</td>
+            <td class="best">79.17</td>
+            <td class="best">58.33</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EMG Downstream -->
+    <h3 style="font-family:'Google Sans',sans-serif;font-weight:600;font-size:1.15rem;margin-top:2.5rem;margin-bottom:0.75rem;"><span class="emg">EMG</span> Downstream Performance</h3>
+    <p class="content-paragraph" style="margin-bottom:1rem;">
+      <span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span> outperforms PhysioWave and TinyMyo across all four classification tasks by a wide margin, demonstrating that high-fidelity tokenization transfers effectively to muscular activity decoding.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="result-table" style="font-size:0.85rem;">
+        <thead>
+          <tr>
+            <th rowspan="2">Model</th><th colspan="2">Discrete Gestures</th><th colspan="2">EPN-612</th><th colspan="2">NinaPro DB5</th><th colspan="2">UCI-EMG</th>
+          </tr>
+          <tr>
+            <th>BAcc ↑</th><th>CLER ↓</th><th>Acc</th><th>F1</th><th>Acc</th><th>F1</th><th>Acc</th><th>F1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PhysioWave</td><td>54.70</td><td>64.20</td><td>90.30</td><td>90.35</td><td>24.91</td><td>22.95</td><td>56.52</td><td>55.76</td>
+          </tr>
+          <tr>
+            <td>TinyMyo</td><td>39.70</td><td>64.20</td><td>84.68</td><td>84.68</td><td>25.26</td><td>23.29</td><td>85.99</td><td>85.66</td>
+          </tr>
+          <tr>
+            <td><strong><span class="nrvq-grad">NeuroRVQ</span>-<span class="emg">EMG</span></strong></td>
+            <td class="best">70.80</td>
+            <td class="best">27.60</td>
+            <td class="best">94.65</td>
+            <td class="best">94.66</td>
+            <td class="best">41.36</td>
+            <td class="best">38.76</td>
+            <td class="best">89.43</td>
+            <td class="best">89.28</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -732,9 +900,9 @@
 
       <!-- 1 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#4ECFFF;"></div>
+        <div class="timeline-marker" style="background:#58B9F9;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#4ECFFF;color:#1a1a2e;">NeurIPS 2024 Workshop</span>
+          <span class="timeline-badge" style="background:#58B9F9;color:#1a1a2e;">NeurIPS 2024 Workshop</span>
           <h4 class="timeline-title">A Causal Perspective in Brainwave Foundation Models</h4>
           <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
           <p class="timeline-desc">Examined LBM training through causal reasoning, identifying key challenges impacting performance and generalization in BCI applications.</p>
@@ -744,9 +912,9 @@
 
       <!-- 2 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#4ECFFF;"></div>
+        <div class="timeline-marker" style="background:#62A4F4;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#4ECFFF;color:#1a1a2e;">NeurIPS 2024 Workshop</span>
+          <span class="timeline-badge" style="background:#62A4F4;color:#1a1a2e;">NeurIPS 2024 Workshop</span>
           <h4 class="timeline-title">Position: Addressing Ethical Challenges and Safety Risks in GenAI-Powered BCIs</h4>
           <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>*, Georgios Zoumpourlis*, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
           <p class="timeline-desc">Identified safety and ethical concerns in GenAI for BCIs, including synthetic neural activity, behaviour profiling, and privacy risks, along with mitigation strategies.</p>
@@ -756,9 +924,9 @@
 
       <!-- 3 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#7B6FE8;"></div>
+        <div class="timeline-marker" style="background:#6C8FEF;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#7B6FE8;">IEEE MLSP 2025 · ICLR 2025 Workshop</span>
+          <span class="timeline-badge" style="background:#6C8FEF;">IEEE MLSP 2025 · ICLR 2025 Workshop</span>
           <h4 class="timeline-title">Assessing the Capabilities of Large Brainwave Foundation Models</h4>
           <p class="timeline-authors">Na Lee*, Stylianos Bakas*, <strong>Konstantinos Barmpas</strong>, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
           <p class="timeline-desc">Proposed a rigorous benchmarking protocol using causal reasoning and subject-independent cross-validation to properly evaluate LBMs across diverse BCI paradigms.</p>
@@ -768,9 +936,9 @@
 
       <!-- 4 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#7B6FE8;"></div>
+        <div class="timeline-marker" style="background:#7679EA;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#7B6FE8;">ICML 2025</span>
+          <span class="timeline-badge" style="background:#7679EA;">ICML 2025</span>
           <h4 class="timeline-title">Are Large Brainwave Foundation Models Capable Yet? Insights from Fine-tuning</h4>
           <p class="timeline-authors">Na Lee*, <strong>Konstantinos Barmpas</strong>*, Yannis Panagakis, Dimitrios Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
           <p class="timeline-desc">Comprehensively evaluated LBMs through fine-tuning experiments, revealing marginal gains over traditional architectures and pioneering LoRA adaptation for brainwave models.</p>
@@ -780,9 +948,9 @@
 
       <!-- 5 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#C56FE8;"></div>
+        <div class="timeline-marker" style="background:#866FE4;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#C56FE8;">Survey 2025</span>
+          <span class="timeline-badge" style="background:#866FE4;">Survey 2025</span>
           <h4 class="timeline-title">A Comprehensive Review of Biosignal Foundation Models</h4>
           <p class="timeline-authors">Na Lee, <strong>Konstantinos Barmpas</strong>, Alexandros Koliousis, Yannis Panagakis, Dimitrios Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
           <p class="timeline-desc">A structured survey covering <span class="eeg">EEG</span>, <span class="ecg">ECG</span>, <span class="emg">EMG</span>, EOG, and PPG foundation models — reviewing data processing, architectures, pre-training paradigms, and open challenges.</p>
@@ -792,9 +960,9 @@
 
       <!-- 6 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#E06FCA;"></div>
+        <div class="timeline-marker" style="background:#9C6FDE;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#E06FCA;">NeurIPS 2025 Workshop</span>
+          <span class="timeline-badge" style="background:#9C6FDE;">NeurIPS 2025 Workshop</span>
           <h4 class="timeline-title">Subject-Aware Contrastive Learning for EEG Foundation Models</h4>
           <p class="timeline-authors">Antonis Karantonis*, <strong>Konstantinos Barmpas</strong>*, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou, Yannis Panagakis</p>
           <p class="timeline-desc">Introduced the first subject-aware contrastive EEG foundation model, leveraging intra-subject variability across sessions as a natural supervisory signal.</p>
@@ -804,9 +972,9 @@
 
       <!-- 7 -->
       <div class="timeline-item">
-        <div class="timeline-marker" style="background:#E06FCA;"></div>
+        <div class="timeline-marker" style="background:#B36FD7;"></div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#E06FCA;">NeurIPS 2025 Workshop</span>
+          <span class="timeline-badge" style="background:#B36FD7;">NeurIPS 2025 Workshop</span>
           <h4 class="timeline-title">Advancing Brainwave Modeling with a Codebook-Based Foundation Model</h4>
           <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>*, Na Lee*, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
           <p class="timeline-desc">Introduced LaBraM++, an enhanced LBM with principled signal processing improvements to the tokenizer, achieving 6% improvement over the original architecture.</p>
@@ -814,14 +982,37 @@
         </div>
       </div>
 
-      <!-- NeuroRVQ -->
+      <!-- NeuroRVQ v1 -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#C96FD0;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#C96FD0;">arXiv 2025</span>
+          <h4 class="timeline-title"><span class="nrvq-grad">NeuroRVQ</span>: Multi-Scale EEG Tokenization for Generative Large Brainwave Models</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Na Lee, Alexandros Koliousis, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Introduced a state-of-the-art codebook-based EEG tokenizer with multi-scale RVQ and phase-aware training, powering a new generation of Large Brainwave Models.</p>
+          <a href="https://arxiv.org/abs/2510.13068" target="_blank" class="timeline-link">arXiv &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Beyond Accuracy -->
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background:#E06FCA;"></div>
+        <div class="timeline-content">
+          <span class="timeline-badge" style="background:#E06FCA;">arXiv 2026</span>
+          <h4 class="timeline-title">Beyond Accuracy: Robustness, Interpretability and Expressiveness of EEG Foundation Models</h4>
+          <p class="timeline-authors">Urban Širca, Maryam Alimardani, Stefanos Zafeiriou, <strong>Konstantinos Barmpas</strong></p>
+          <p class="timeline-desc">First systematic assessment of EEG foundation model robustness under noise and channel dropout, interpretability via AttnLRP attribution maps, and expressiveness through block-wise probing.</p>
+        </div>
+      </div>
+
+      <!-- NeuroRVQ v2 — NeurIPS 2026 -->
       <div class="timeline-item timeline-highlight">
         <div class="timeline-marker timeline-marker-star">&#9733;</div>
         <div class="timeline-content">
-          <span class="timeline-badge" style="background:#363636;">2025</span>
-          <h4 class="timeline-title" style="font-size:1.15rem;"><span class="nrvq-grad">NeuroRVQ</span>: Multi-Scale EEG Tokenization for Generative Large Brainwave Models</h4>
-          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Na Lee, Alexandros Koliousis, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Stefanos Zafeiriou</p>
-          <p class="timeline-desc">Culmination of all prior insights — a state-of-the-art codebook-based tokenizer with multi-scale RVQ and phase-aware training, powering a new generation of Large Brainwave Models.</p>
+          <span class="timeline-badge" style="background:#363636;">arXiv 2026</span>
+          <h4 class="timeline-title" style="font-size:1.15rem;"><span class="nrvq-grad">NeuroRVQ</span>: Multi-Scale Biosignal Tokenization for Generative Foundation Models</h4>
+          <p class="timeline-authors"><strong>Konstantinos Barmpas</strong>, Na Lee, Dimitrios Chalatsis, William Raftery, Yannis Panagakis, Dimitrios A. Adamos, Nikolaos Laskaris, Alexandros Koliousis, Dario Farina, Stefanos Zafeiriou</p>
+          <p class="timeline-desc">Culmination of all prior insights — a state-of-the-art modality-adaptive biosignal tokenizer with multi-scale RVQ and phase-aware training across <span class="eeg">EEG</span>, <span class="ecg">ECG</span> and <span class="emg">EMG</span>, powering a new generation of biosignal foundation models.</p>
           <a href="https://arxiv.org/abs/2510.13068" target="_blank" class="timeline-link">arXiv &rarr;</a>
         </div>
       </div>
@@ -839,8 +1030,8 @@
         <i class="fas fa-copy"></i> Copy
       </button>
 <pre id="bibtex-text" style="margin:0;white-space:pre-wrap;">@misc{neurorvq,
-      title={NeuroRVQ: Multi-Scale EEG Tokenization for Generative Large Brainwave Models},
-      author={Konstantinos Barmpas and Na Lee and Alexandros Koliousis and Yannis Panagakis and Dimitrios A. Adamos and Nikolaos Laskaris and Stefanos Zafeiriou},
+      title={NeuroRVQ: Multi-Scale Biosignal Tokenization for Generative Foundation Models},
+      author={Konstantinos Barmpas and Na Lee and Dimitrios Chalatsis and William Raftery and Yannis Panagakis and Dimitrios A. Adamos and Nikolaos Laskaris and Alexandros Koliousis and Dario Farina and Stefanos Zafeiriou},
       year={2025},
       eprint={2510.13068},
       archivePrefix={arXiv},
